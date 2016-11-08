@@ -14,11 +14,9 @@ class Nasa:
 				self.parameters = {"lon": self.long, "lat": self.lat, "api_key":"9Jz6tLIeJ0yY9vjbEUWaH9fsXA930J9hspPchute"} #parameters 
 				self.success = True #success boolean
 			else:
-				self.success = False
-				print "Location entered is invalid."
+				self.success = False #Location entered is invalid.
 		except:
-			self.success = False
-			print "Location entered is invalid."
+			self.success = False  #Location entered is invalid.
  
 	def getRecent(self):
 		try:
@@ -26,8 +24,7 @@ class Nasa:
 			imageryDate = json.loads(response.content)["date"] #get recent image date
 			self.recent = datetime.strptime(imageryDate, "%Y-%m-%dT%H:%M:%S") #format to datetime
 		except: #catches if error occurs when retreiving imagery data
-			self.success = False
-			print "No imagery data found for location."
+			self.success = False #No imagery data found for location.
 
 	def getAverage(self):
 		try:
@@ -44,14 +41,13 @@ class Nasa:
 				totalDays += difference #add to total day counter
 			self.average = totalDays/(int(totalDates)-1) #find average day count
 		except: #catches if error occurs when retreiving asset data
-			self.success = False
-			print "No asset data found for location."
+			self.success = False #No asset data found for location.
 
 	def calculateNext(self):
 		self.nextPhoto = self.recent + timedelta(days=int(self.average)) #add average date to recent date git 
 		print "The next time (%s latitude ,%s longitude) will be shot is %s." % (self.lat, self.long, self.nextPhoto)
 
-	def __del__(self):
+	def __del__(self): #destructor
 		if self.success == True:
 			print "Successfuly found when the next satellite image will be taken.\n"
 		else:
@@ -65,21 +61,16 @@ def flyBy(latitude, longitude):
 		Location.calculateNext()
 		del Location
 	except:
-		return ("Failed to find when the next time a satellite image will be taken") #catches any unaccounted for errors
+		return ("Failed to find when the next time a satellite image will be taken") #catches any unaccounted errors
 
 def main():
-	#flyBy(89,2)
-	#flyBy(22, 1400)
-	#flyBy(100,"a")
-	#flyBy(89,2)
 	flyBy(36.098592,-112.097796) #Grand Canyon
 	flyBy(43.078154,-79.075891) #Niagra Falls
 	flyBy(36.998979,-109.045183) #Four Corners Monument
 	flyBy(37.7937007,-122.4039064) #Delphix San Francisco
+	flyBy(-100,20) #latitude out of range
+	flyBy("lat",20) #string entered as parameter
+	flyBy(89, 2) #no image data present
 
 if __name__ == "__main__":
     main()
-
-
-#request exxcept error
-#check if nothing is insude in requsest emptyu 
