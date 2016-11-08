@@ -1,4 +1,3 @@
-import sys
 import requests
 import json
 from datetime import datetime
@@ -6,7 +5,7 @@ from datetime import timedelta
 
 class Nasa:
 
-	def __init__(self, latitude, longitude):
+	def __init__(self, latitude, longitude): #constructor
 		try:
 			self.lat = float(latitude) #check if latitude is numeric
 			self.long = float(longitude) #check if longitude is numeric
@@ -69,7 +68,7 @@ def main():
 	flyBy(36.998979,-109.045183) #Four Corners Monument
 	flyBy(37.7937007,-122.4039064) #Delphix San Francisco
 	flyBy(-100,20) #latitude out of range
-	flyBy("lat",20) #string entered as parameter
+	flyBy("lat",22) #string entered as parameter
 	flyBy(89, 2) #no image data present
 
 if __name__ == "__main__":
